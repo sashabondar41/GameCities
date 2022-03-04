@@ -4,6 +4,8 @@ import main.Game;
 import main.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayInputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -24,8 +26,10 @@ class GameTest {
 
     @Test
     void testPlayersInput() {
-        List<Player> players = Arrays.asList(new Player("Захар"), new Player("Саня"));
+        List<String> players = Arrays.asList("Захар","Саня");
+        String inputs = "2\nЗахар\nСаня";
+        System.setIn(new ByteArrayInputStream(inputs.getBytes()));
         game.gettingReady();
-        assertEquals(players, game.getPlayers());
+        assertEquals(players, game.getPlayersNames());
     }
 }
