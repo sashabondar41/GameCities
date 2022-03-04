@@ -14,6 +14,10 @@ public class Game {
         players = new ArrayList<>();
     }
 
+    public List<String> getUsedCities() {
+        return usedCities;
+    }
+
     public List<String> getPlayersNames() {
         List<String> lst = new ArrayList<>();
         for (Player pl: players)
@@ -50,5 +54,9 @@ public class Game {
             letter = city.toLowerCase(Locale.ROOT).charAt(city.length() - i);
         }
         return letter;
+    }
+
+    public void run(){
+
     }
 }

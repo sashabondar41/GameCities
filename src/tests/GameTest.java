@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,4 +33,39 @@ class GameTest {
         game.gettingReady();
         assertEquals(players, game.getPlayersNames());
     }
+
+    @Test
+    void testRun1() {
+        List<String> result = Arrays.asList("москва","архангельск","курск","казань","норильск");
+        String inputs = """
+                2
+                Захар
+                Саня
+                Москва
+                Архангельск
+                пыкпвкпка
+                Курск
+                Курск
+                уыпыкпып
+                Воркута
+                Казань
+                Норильск
+                """;
+        game.run();
+        assertEquals(result, game.getUsedCities());
+    }
+
+    @Test
+    void testRun2() {
+        List<String> result = Collections.singletonList("тверь");
+        String inputs = """
+                2
+                Захар
+                Саня
+                Тверь
+                """;
+        game.run();
+        assertEquals(result, game.getUsedCities());
+    }
+
 }
