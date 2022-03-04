@@ -1,11 +1,12 @@
 package tests;
 
+import main.Cities;
 import main.Game;
-import main.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -15,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameTest {
     private Game game;
     @BeforeEach
-    void setUp() {
-        game = new Game();
+    void setUp() throws IOException {
+        game = new Game(Cities.getCities());
     }
 
     @Test
@@ -51,7 +52,8 @@ class GameTest {
                 Казань
                 Норильск
                 """;
-        game.run();
+        System.setIn(new ByteArrayInputStream(inputs.getBytes()));
+        game.start();
         assertEquals(result, game.getUsedCities());
     }
 
@@ -64,7 +66,8 @@ class GameTest {
                 Саня
                 Тверь
                 """;
-        game.run();
+        System.setIn(new ByteArrayInputStream(inputs.getBytes()));
+        game.start();
         assertEquals(result, game.getUsedCities());
     }
 

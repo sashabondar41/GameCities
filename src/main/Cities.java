@@ -31,7 +31,6 @@ public class Cities {
             city = modifyCity(city);
             cities.add(city);
         }
-        System.out.println(cities);
         return cities;
     }
 }
