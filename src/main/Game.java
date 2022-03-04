@@ -50,7 +50,7 @@ public class Game {
     private String firstStep(){
         Scanner in = new Scanner(System.in);
         while (true){
-            System.out.println("На все ходы. кроме этого, у игрока будет 30 секунд.\nВведите любой город для начала игры ");
+            System.out.println("На все ходы, кроме этого, у игрока будет 30 секунд.\nВведите любой город для начала игры ");
             String answer = in.nextLine().toLowerCase(Locale.ROOT).replace('ё', 'е');
             if (citiesPool.contains(answer)){
                 usedCities.add(answer);
