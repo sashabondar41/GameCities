@@ -6,9 +6,9 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Game {
-    private List<Player> players;
-    private List<String> citiesPool;
-    private List<String> usedCities;
+    private final List<Player> players;
+    private final List<String> citiesPool;
+    private final List<String> usedCities;
 
     public Game(List<String> cities) {
         this.citiesPool = cities;
@@ -16,19 +16,7 @@ public class Game {
         this.usedCities = new ArrayList<>();
     }
 
-    public List<String> getUsedCities() {
-
-        return usedCities;
-    }
-
-    public List<String> getPlayersNames() {
-        List<String> lst = new ArrayList<>();
-        for (Player pl: players)
-            lst.add(pl.getName());
-        return lst;
-    }
-
-    public void gettingReady(){
+    private void gettingReady(){
         Scanner in = new Scanner(System.in);
         System.out.println("Приветстуем всех на игре в города\nПожалуйста, введите количество игроков.\nМаксимальное количество - 9!");
         int count = Integer.parseInt(in.nextLine());
@@ -48,7 +36,7 @@ public class Game {
         }
     }
 
-    public char checkLetter(String city){
+    private char checkLetter(String city){
         char letter = city.toLowerCase(Locale.ROOT).charAt(city.length() - 1);
         for (int i = 2; i<city.length();i++){
             if (letter != 'ъ' && letter != 'ы' && letter != 'ь'){
@@ -74,7 +62,7 @@ public class Game {
         }
     }
 
-    public class Step extends Thread{
+    private class Step extends Thread{
         private String city;
 
         public Step(String city){
