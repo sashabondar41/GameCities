@@ -1,9 +1,10 @@
 package main;
 
 public class Player {
-    private String name;
+    private final String name;
 
-    public Player() {
+    public Player(String name) {
+        this.name = name;
     }
 
     public String getName() {
