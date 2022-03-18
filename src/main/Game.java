@@ -18,11 +18,32 @@ public class Game {
 
     private void gettingReady(){
         Scanner in = new Scanner(System.in);
-        System.out.println("Приветстуем всех на игре в города\nПожалуйста, введите количество игроков.\nМаксимальное количество - 9!");
-        int count = Integer.parseInt(in.nextLine());
+        System.out.println("Приветстуем всех на игре в города\nПожалуйста, введите количество игроков.\nВозможное количество -  от 2 до 9!");
+        int count;
+        while (true) {
+            try{
+                count = Integer.parseInt(in.nextLine());
+                if (count < 2 || count > 9){
+                    System.out.println("К сожалению, такое количество игроков не поддерживается, введите другое");
+                }else{
+                    break;
+                }
+            } catch (NumberFormatException exception){
+                System.out.println("Пожалуйста, введите число");
+            }
+        }
+        String name;
         for (int i = 0; i < count; i++){
             System.out.println("Введите имя " + (i+1) + " игрока");
-            players.add(new Player(in.nextLine()));
+            while (true){
+                name = in.nextLine();
+                if (name.equals("") || name.contains(";")){
+                    System.out.println("Имя не должно быть пустым или содержать \";\"");
+                }else{
+                    players.add(new Player(name));
+                    break;
+                }
+            }
         }
         System.out.print("Итак, сегодня с нами играют: ");
         for (int i = 0; i < players.size(); i++) {
@@ -31,7 +52,7 @@ public class Game {
             }else if (i == players.size() - 1){
                 System.out.println(players.get(i).getName());
             }else{
-                System.out.print(players.get(i).getName() + ", ");
+                System.out.print(players.get(i).getName() + "; ");
             }
         }
     }
@@ -49,15 +70,15 @@ public class Game {
 
     private String firstStep(){
         Scanner in = new Scanner(System.in);
+        System.out.println("На все ходы, кроме этого, у игрока будет 30 секунд.\nВведите любой город для начала игры ");
         while (true){
-            System.out.println("На все ходы, кроме этого, у игрока будет 30 секунд.\nВведите любой город для начала игры ");
             String answer = in.nextLine().toLowerCase(Locale.ROOT).replace('ё', 'е');
             if (citiesPool.contains(answer)){
                 usedCities.add(answer);
                 return answer;
             }
             else{
-                System.out.println("Нет такого города!");
+                System.out.println("Нет такого города!\nВведите любой город для начала игры ");
             }
         }
     }
@@ -79,22 +100,21 @@ public class Game {
             while (true){
                 System.out.println("Введите город на букву " + (char)(letter - 32));
                 String answer = in.nextLine().toLowerCase(Locale.ROOT).replace('ё', 'е');
-                if (answer.charAt(0) == letter){
-                    if (!usedCities.contains(answer)){
-                        if (citiesPool.contains(answer)){
+                if (citiesPool.contains(answer)) {
+                    if (answer.charAt(0) == letter) {
+                        if (!usedCities.contains(answer)) {
                             usedCities.add(answer);
                             this.city = answer;
                             this.interrupt();
                             break;
+                        } else {
+                            System.out.println("Такой город уже назван!");
                         }
-                        else{
-                            System.out.println("Нет такого города!");
-                        }
-                    }else{
-                        System.out.println("Такой город уже назван!");
+                    } else {
+                        System.out.println("Город начинается на другую букву!");
                     }
                 }else{
-                    System.out.println("Город начинается на другую букву!");
+                    System.out.println("Нет такого города!");
                 }
             }
         }
