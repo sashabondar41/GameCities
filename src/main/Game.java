@@ -70,15 +70,15 @@ public class Game {
 
     private String firstStep(){
         Scanner in = new Scanner(System.in);
+        System.out.println("На все ходы, кроме этого, у игрока будет 30 секунд.\nВведите любой город для начала игры ");
         while (true){
-            System.out.println("На все ходы, кроме этого, у игрока будет 30 секунд.\nВведите любой город для начала игры ");
             String answer = in.nextLine().toLowerCase(Locale.ROOT).replace('ё', 'е');
             if (citiesPool.contains(answer)){
                 usedCities.add(answer);
                 return answer;
             }
             else{
-                System.out.println("Нет такого города!");
+                System.out.println("Нет такого города!\nВведите любой город для начала игры ");
             }
         }
     }
@@ -100,22 +100,21 @@ public class Game {
             while (true){
                 System.out.println("Введите город на букву " + (char)(letter - 32));
                 String answer = in.nextLine().toLowerCase(Locale.ROOT).replace('ё', 'е');
-                if (answer.charAt(0) == letter){
-                    if (!usedCities.contains(answer)){
-                        if (citiesPool.contains(answer)){
+                if (citiesPool.contains(answer)) {
+                    if (answer.charAt(0) == letter) {
+                        if (!usedCities.contains(answer)) {
                             usedCities.add(answer);
                             this.city = answer;
                             this.interrupt();
                             break;
+                        } else {
+                            System.out.println("Такой город уже назван!");
                         }
-                        else{
-                            System.out.println("Нет такого города!");
-                        }
-                    }else{
-                        System.out.println("Такой город уже назван!");
+                    } else {
+                        System.out.println("Город начинается на другую букву!");
                     }
                 }else{
-                    System.out.println("Город начинается на другую букву!");
+                    System.out.println("Нет такого города!");
                 }
             }
         }
