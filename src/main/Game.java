@@ -32,9 +32,18 @@ public class Game {
                 System.out.println("Пожалуйста, введите число");
             }
         }
+        String name;
         for (int i = 0; i < count; i++){
             System.out.println("Введите имя " + (i+1) + " игрока");
-            players.add(new Player(in.nextLine()));
+            while (true){
+                name = in.nextLine();
+                if (name.equals("") || name.contains(";")){
+                    System.out.println("Имя не должно быть пустым или содержать \";\"");
+                }else{
+                    players.add(new Player(name));
+                    break;
+                }
+            }
         }
         System.out.print("Итак, сегодня с нами играют: ");
         for (int i = 0; i < players.size(); i++) {
@@ -43,7 +52,7 @@ public class Game {
             }else if (i == players.size() - 1){
                 System.out.println(players.get(i).getName());
             }else{
-                System.out.print(players.get(i).getName() + ", ");
+                System.out.print(players.get(i).getName() + "; ");
             }
         }
     }
