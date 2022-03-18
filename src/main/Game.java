@@ -18,8 +18,20 @@ public class Game {
 
     private void gettingReady(){
         Scanner in = new Scanner(System.in);
-        System.out.println("Приветстуем всех на игре в города\nПожалуйста, введите количество игроков.\nМаксимальное количество - 9!");
-        int count = Integer.parseInt(in.nextLine());
+        System.out.println("Приветстуем всех на игре в города\nПожалуйста, введите количество игроков.\nВозможное количество -  от 2 до 9!");
+        int count;
+        while (true) {
+            try{
+                count = Integer.parseInt(in.nextLine());
+                if (count < 2 || count > 9){
+                    System.out.println("К сожалению, такое количество игроков не поддерживается, введите другое");
+                }else{
+                    break;
+                }
+            } catch (NumberFormatException exception){
+                System.out.println("Пожалуйста, введите число");
+            }
+        }
         for (int i = 0; i < count; i++){
             System.out.println("Введите имя " + (i+1) + " игрока");
             players.add(new Player(in.nextLine()));
